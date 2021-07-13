@@ -1,0 +1,49 @@
+CREATE  DATABASE Bank_credits;
+show databases;
+use  Bank_credits; 
+
+create   table  `CLІENT`
+
+(`Id_cl` int(2) not null primary key,
+`pib_cl` varchar(30) not null,
+`work_cl` varchar(30) not null,
+`tel_cl` char(10),
+`adr_cl` varchar(50),
+`pasp_cl` char(10));
+
+describe `CLІENT`;
+
+create   table  `CREDIT`
+
+(`Kod_cr` int(2) not null primary key,
+`name_cr` varchar(15) not null,
+`type_cr` varchar(15) not null,
+`max_sum_cr` int(4),
+`annual_rate_cr` int(3),
+`max_term_cr` int(2));
+
+describe `CREDIT`;
+
+create   table  `EMPL`
+
+(`Kod_empl` int(2) not null primary key,
+`pib_empl` varchar(30) not null,
+`adr_empl` varchar(50),
+`tel_empl` char(10),
+`special_empl` varchar(30) not null);
+
+describe `EMPL`;
+
+create   table  `DEC_CREDIT`
+
+(`Num_contr` int(4) not null primary key,
+`Kod_cr` int(2) not null references `CREDIT`(Kod_cr),
+`Id_cl` int(2) not null references `CLIENT`(Id_cl),
+`Kod_empl` int(2) not null references `EMPL`(Kod_empl),
+`term_contr` int(2),
+`sum_contr` int(4),
+`date_contr` date not null);
+
+describe `DEC_CREDIT`;
+
+show tables;

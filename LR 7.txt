@@ -1,0 +1,38 @@
+show databases;
+use  Bank_credits; 
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/CLIENT.txt' INTO TABLE `CLІENT`;
+select * from `CLІENT`;
+
+INSERT INTO `CLІENT`   VALUES (1, 'Petrenko Petr', 'Hirurg', '0678564129', 'Dnepr str. Titova 27', 2354789615);
+INSERT INTO `CLІENT`   VALUES (2, 'Petrenko Ivan', 'Marketolog', '0678568199', 'Dnepr str. Makarova 33', 3344989526);
+INSERT INTO `CLІENT`   VALUES (3, 'Ivashenko Pavlo', 'Philolog', '0666564139', 'Kiev str. Yaroslava 17', 1394789210);
+INSERT INTO `CLІENT`   VALUES (4, 'Kolotylo Dmitriy', 'Lingvist', '0978564119', 'Dnepr str. Titova 7A', 6324488692);
+INSERT INTO `CLІENT`   VALUES (5, 'Pavlov Volodymyr', 'Perevodchik', '0578569119', 'Kiev str. Naberegnaya 37', 9354882615);
+select * from `CLІENT`;
+
+
+INSERT INTO `CREDIT`   VALUES (001, 'Vygidnyy', 'Banking', 10000, 25, 36);
+INSERT INTO `CREDIT`   VALUES (009, 'Blagodiynyy', 'Commercial', 100000, 15, 24);
+INSERT INTO `CREDIT`   VALUES (004, 'Doskonalyy', 'Ipotechnyy', 2500000, 19, 48);
+INSERT INTO `CREDIT`   VALUES (007, 'Publichnyy', 'Podatcovyy', 15000, 11, 12);
+INSERT INTO `CREDIT`   VALUES (008, 'Universal', 'Banking', 5000000, 16, 60);
+select * from `CREDIT`;
+
+
+INSERT INTO `EMPL`   VALUES (32, 'Hmarskiy Valy', 'Kiev str. Volkova', 4478681290, 'Konsultant');
+INSERT INTO `EMPL`   VALUES (52, 'Gubov Georg', 'Poltava str. Zelenaya', 6478671200, 'Konsultant II');
+INSERT INTO `EMPL`   VALUES (12, 'Gnoyniy Oleksandr', 'Kiev str. Velikogo', 5478691290, 'Konsultant III');
+INSERT INTO `EMPL`   VALUES (11, 'Oleksenko Valyntyn', 'Kiev str. Volya', 4478683390, 'Sekretar');
+INSERT INTO `EMPL`   VALUES (26, 'Murat Vitya', 'Kiev str. Velkova', 6658681290, 'Zam Derectora');
+select * from `EMPL`;
+
+
+INSERT INTO `DEC_CREDIT`   VALUES (12, 009, 1, 52, 10, 5000, '22.07.2020');
+INSERT INTO `DEC_CREDIT`   VALUES (2, 004, 4, 32, 24, 50000, '01.03.2021');
+INSERT INTO `DEC_CREDIT`   VALUES (1, 007, 2, 11, 9, 7500, '02.05.2020');
+INSERT INTO `DEC_CREDIT`   VALUES (19, 008, 3, 12, 48, 250000, '12.06.2020');
+INSERT INTO `DEC_CREDIT`   VALUES (11, 009, 5, 26, 12, 2500, '17.02.2020');
+select * from `DEC_CREDIT`;
+
+show tables;

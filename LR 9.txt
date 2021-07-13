@@ -1,0 +1,27 @@
+show databases;
+use  Bank_credits;
+
+
+SELECT num_contr   FROM  `DEC_CREDIT` where term_contr = (SELECT MAX(term_contr) FROM `DEC_CREDIT`); +
+
+Select MONTH(date_contr), count(*) from `DEC_CREDIT` WHERE YEAR(date_contr)=2020 GROUP BY  MONTH(date_contr);+
+
+
+select  MIN(max_sum_cr) FROM `credit`;+
+
+
+
+SELECT count(*), special_empl FROM  `EMPL` group by special_empl; +
+
+
+SELECT type_cr FROM  `CREDIT` GROUP BY  type_cr having count(*)=(select count(*) from `CREDIT` group by type_cr order by count(*) desc LIMIT 1);+
+
+
+SELECT MONTH(date_contr) FROM `DEC_CREDIT` GROUP BY  MONTH(date_contr) having count(*) = (select count(*) from `DEC_CREDIT` group by MONTH(date_contr) order by count(*) desc LIMIT 1);+
+
+
+
+SELECT count(DISTINCT Id_cl) FROM  `DEC_CREDIT`; +
+
+
+show tables;

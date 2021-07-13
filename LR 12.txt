@@ -1,0 +1,22 @@
+show databases;
+
+use  Bank_credits;
+
+delimiter //
+START TRANSACTION//
+
+Select `CREDIT`.name_cr, `CREDIT`.type_cr, `CREDIT`.max_sum_cr, `CREDIT`.annual_rate_cr, 
+`CREDIT`.max_term_cr, `DEC_CREDIT`.term_contr, `DEC_CREDIT`.sum_contr, `DEC_CREDIT`.date_contr 
+FROM  `CREDIT` INNER JOIN `DEC_CREDIT` ON `credit`.kod_cr = `DEC_CREDIT`.kod_cr 
+GROUP BY  type_cr having count(*)=(select count(*) from `CREDIT` group by type_cr order by count(*) desc LIMIT 1)//
+
+UPDATE `CREDIT` set annual_rate_cr = annual_rate_cr *1.1 where `CREDIT`.kod_cr =(select a.kod_cr from (Select `CREDIT`.kod_cr FROM `CREDIT` INNER JOIN
+`DEC_CREDIT` ON `credit`.kod_cr = `DEC_CREDIT`.kod_cr GROUP BY  type_cr having count(*)=(select count(*) from `CREDIT` group by type_cr order by
+count(*) desc LIMIT 1)) as a)
+//
+
+Select * from  `DEC_CREDIT`//
+commit//
+delimiter ;
+
+rollback transaction;

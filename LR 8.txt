@@ -1,0 +1,17 @@
+show databases;
+use  Bank_credits;
+
+select pib_empl, adr_empl from `empl` where adr_empl = 'Kiev pr. Polya';
+
+
+select * FROM `credit`   WHERE  max_sum_cr  BETWEEN 100000 AND 500000;
+
+
+SELECT * FROM  `CLІENT`   WHERE tel_cl   LIKE '066%' or tel_cl   LIKE '050%' or tel_cl   LIKE '095%' or tel_cl   LIKE '099%';
+
+select * FROM  `DEC_CREDIT` where date_contr  LIKE '2020-03%';
+
+SELECT * FROM  `CLІENT`   WHERE pasp_cl   LIKE  '%48%';
+
+
+show tables;

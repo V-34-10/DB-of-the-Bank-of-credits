@@ -1,0 +1,20 @@
+﻿show databases;
+
+use  Bank_credits;
+
+delimiter //
+CREATE PROCEDURE `my_proc1`( pib varchar (30),  d date)
+          Begin
+          Select  `CLІENT`.pib_cl, `DEC_CREDIT`.term_contr,
+          `DEC_CREDIT`.sum_contr / `DEC_CREDIT`.term_contr * (`CREDIT`.annual_rate_cr/100), `DEC_CREDIT`.date_contr, 
+          DATE_ADD(`DEC_CREDIT`.date_contr, INTERVAL `DEC_CREDIT`.term_contr MONTH) 
+          from `CLІENT` inner join `DEC_CREDIT` ON `CLІENT`.Id_cl = `DEC_CREDIT`.Id_cl inner join `CREDIT` 
+          ON `CREDIT`.Kod_cr = `DEC_CREDIT`.Kod_cr
+          where `CLІENT`.pib_cl = pib AND `DEC_CREDIT`.date_contr = d;
+          End //
+
+delimiter ;
+
+CALL `my_proc1`('Petrenko Petr','2022-07-20');
+
+DROP PROCEDURE `my_proc1`;

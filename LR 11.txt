@@ -1,0 +1,11 @@
+show databases;
+
+use  Bank_credits;
+
+SELECT `CREDIT`.kod_cr, `CREDIT`.type_cr FROM  `CREDIT` where `CREDIT`.kod_cr NOT IN (select kod_cr from `DEC_CREDIT`);+
+
+
+SELECT `DEC_CREDIT`.term_contr, `DEC_CREDIT`.sum_contr, `DEC_CREDIT`.date_contr FROM  `DEC_CREDIT` INNER JOIN `CREDIT` ON `DEC_CREDIT`.kod_cr = `CREDIT`.kod_cr where annual_rate_cr > ANY (Select  AVG(annual_rate_cr) from `CREDIT`);+
+
+
+SELECT `EMPL`.pib_empl, `EMPL`.adr_empl, `EMPL`.tel_empl, `EMPL`.special_empl FROM  `EMPL` INNER JOIN `DEC_CREDIT` ON `empl`.kod_empl = `DEC_CREDIT`.kod_empl where date_contr NOT IN ( Year(date_contr) = 2021 and Month(date_contr) = 2);+

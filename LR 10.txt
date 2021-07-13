@@ -1,0 +1,20 @@
+show databases;
+use  Bank_credits;
+
+SELECT `CREDIT`.name_cr, `CREDIT`.type_cr, `CREDIT`.max_sum_cr, `CREDIT`.annual_rate_cr, `CREDIT`.max_term_cr, `DEC_CREDIT`.num_contr,`DEC_CREDIT`.kod_cr,`DEC_CREDIT`.term_contr, `DEC_CREDIT`.sum_contr, `DEC_CREDIT`.date_contr FROM `credit` INNER JOIN `DEC_CREDIT` ON `credit`.kod_cr = `DEC_CREDIT`.kod_cr where name_cr = "Blagodiynyy";+
+
+SELECT pib_cl, tel_cl FROM `CLІENT` INNER JOIN `DEC_CREDIT` ON `CLІENT`.Id_cl = `DEC_CREDIT`.Id_cl where Year(date_contr) = 2020 and MONTH(date_contr) between 1 and 3;+
+
+
+SELECT `CLІENT`.pib_cl, `CLІENT`.work_cl, `CLІENT`.tel_cl, `CLІENT`.adr_cl, `CLІENT`.pasp_cl, `Empl`.pib_empl FROM `CLІENT` INNER JOIN `DEC_CREDIT` ON `CLІENT`.Id_cl = `DEC_CREDIT`.Id_cl INNER JOIN `Empl` ON `Empl`.kod_empl = `DEC_CREDIT`.kod_empl where pib_empl = "Gubov Georg";+
+
+
+SELECT `DEC_CREDIT`.sum_contr * (`CREDIT`.annual_rate_cr/ (1 - (1 - `CREDIT`.annual_rate_cr) * `DEC_CREDIT`.term_contr)) FROM `credit` INNER JOIN `DEC_CREDIT` ON `credit`.kod_cr = `DEC_CREDIT`.kod_cr where id_cl = 4;+
+
+
+SELECT `CREDIT`.name_cr, `CREDIT`.type_cr, `CREDIT`.max_sum_cr, `CREDIT`.annual_rate_cr, `CREDIT`.max_term_cr, `DEC_CREDIT`.term_contr, `DEC_CREDIT`.sum_contr, `DEC_CREDIT`.date_contr FROM  `CREDIT` INNER JOIN `DEC_CREDIT` ON `credit`.kod_cr = `DEC_CREDIT`.kod_cr where Year(date_contr) = 2020 GROUP BY  type_cr having count(*)=(select count(*) from `CREDIT` group by type_cr order by count(*) desc LIMIT 1);+
+
+
+
+
+Місячна оплата = Сума * (місячна ставка/1-(1-місячна ставка)^термін).

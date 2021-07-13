@@ -1,0 +1,65 @@
+show databases;
+
+use  Bank_credits;
+
+DELIMITER //
+CREATE TRIGGER `my_insert` AFTER INSERT ON  `DEC_CREDIT` FOR EACH ROW
+    BEGIN 
+        DECLARE msg VARCHAR(255); DECLARE msg1 VARCHAR(255);
+        IF NOT EXISTS (SELECT `EMPL`.kod_empl FROM `EMPL` where `EMPL`.kod_empl = NEW.kod_empl)
+        THEN
+            set msg = "Dani ne dodano! Robitnuka ne isnye.";
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+        END IF;       
+        IF NOT EXISTS (SELECT `CREDIT`.Kod_cr FROM `CREDIT` where `CREDIT`.Kod_cr = NEW.Kod_cr)
+        THEN 
+            set msg1 = "Dani ne dodano! Creduty ne isnye.";
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg1;
+        END IF;
+    END//
+
+DELIMITER ; 
+
+DROP TRIGGER `my_insert`;
+
+INSERT INTO `DEC_CREDIT`   VALUES (15, 5, 1, 11, 10, 50000, '23.08.2019');
+
+
+DELIMITER //
+CREATE TRIGGER `my_update` AFTER UPDATE ON `DEC_CREDIT` FOR EACH ROW
+    BEGIN
+        DECLARE msg VARCHAR(255); DECLARE msg1 VARCHAR(255);
+        IF NOT EXISTS (SELECT `EMPL`.kod_empl FROM `EMPL` where `EMPL`.kod_empl = NEW.kod_empl)
+        THEN
+            set msg = "Dani ne zmineno! Robitnuka ne isnye.";
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+        END IF;     
+        IF NOT EXISTS (SELECT `CREDIT`.Kod_cr FROM `CREDIT` where `CREDIT`.Kod_cr = NEW.Kod_cr)
+        THEN 
+            set msg1 = "Dani ne zmineno! Creduty ne isnye.";
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg1;
+        END IF;
+    END//
+
+DELIMITER ;
+
+UPDATE `DEC_CREDIT` SET kod_empl = 5 WHERE kod_empl = 11;
+UPDATE `DEC_CREDIT` SET kod_cr = 5 WHERE kod_cr = 1;
+
+DROP TRIGGER `my_update`;
+
+
+DELIMITER //
+CREATE TRIGGER `my_delete`
+AFTER DELETE
+ON `CREDIT`
+FOR EACH ROW
+BEGIN
+    DELETE FROM `DEC_CREDIT`
+    WHERE `DEC_CREDIT`.Kod_cr = OLD.Kod_cr;
+END //
+DELIMITER ;
+
+DELETE FROM `CREDIT` WHERE Kod_cr = 8;
+
+DROP TRIGGER `my_delete`;
